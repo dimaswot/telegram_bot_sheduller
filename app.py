@@ -38,10 +38,11 @@ def don():
 
 @sched.scheduled_job('interval', seconds=5)
 def print_interval():
-    din();
+    din()
 
 @sched.scheduled_job('cron', day_of_week='fri', hour='15-19/2', timezone='Europe/Moscow')
-    don();
+def print_one():
+    don()
 
 
 @sched.scheduled_job('cron', day_of_week='fri', hour='12', minute='48', timezone='Europe/Moscow')
