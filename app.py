@@ -27,7 +27,7 @@ def receive_update():
 
 
 def din():
-    updater.bot.send_message(chat_id=CHAT_ID,text="AAAAAAAA")
+    updater.bot.send_message(chat_id=CHAT_ID,text="Мне тебе хочется повторить, что пора учить!")
     pass
 
 
