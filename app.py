@@ -43,7 +43,7 @@ def don():
     pass
 
 
-@sched.scheduled_job('interval', seconds=5)
+@sched.scheduled_job('interval', minute=1)
 def print_interval():
     din()
 
