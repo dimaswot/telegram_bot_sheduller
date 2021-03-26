@@ -13,7 +13,7 @@ sched = BlockingScheduler()
 CHAT_ID = 742632933
 
 token = "1693338559:AAFniq64i8lKTKVWjGdq9_9lDki1W4SK3X8"
-url = "https://9c736311012c.ngrok.io"
+url = "https://telegram1bot1ksrpo.herokuapp.com"
 updater = Updater(token, use_context=True)
 
 
@@ -25,6 +25,13 @@ def receive_update():
 
     return {"ok": True}
 
+
+@app.route("/setWebhook")
+def set_webhook():
+    updater.bot.set_webhook(
+        f'{url}/{token}'
+    )
+    return 'ok'
 
 def din():
     updater.bot.send_message(chat_id=CHAT_ID,text="Мне тебе хочется повторить, что пора учить!")
@@ -48,3 +55,4 @@ def print_one():
 @sched.scheduled_job('cron', day_of_week='fri', hour='12', minute='48', timezone='Europe/Moscow')
 def print_one_crone():
     updater.bot.send_message(chat_id=CHAT_ID, text="Это сообщение пришло в определнное время 12 48")
+
