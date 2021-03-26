@@ -19,11 +19,12 @@ updater = Updater(token, use_context=True)
 
 @app.route(f"/{token}", methods=["GET", "POST"])
 def receive_update():
+    
+    update: Update = telegram.Update.de_json(request.json, updater.bot)
+    updater.dispatcher.process_update(update)
     print(update.message.text)
     sched.start();
     print(update.message.chat_id)
-    update: Update = telegram.Update.de_json(request.json, updater.bot)
-    updater.dispatcher.process_update(update)
     
     update.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
     return {"ok": True}
