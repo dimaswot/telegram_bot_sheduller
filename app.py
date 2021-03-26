@@ -17,7 +17,7 @@ url = "https://telegram1bot1ksrpo.herokuapp.com"
 updater = Updater(token, use_context=True)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route(f"/{token}", methods=["GET", "POST"])
 def receive_update():
     sched.start();
     update = telegram.Update.de_json(request.json, updater.bot)
