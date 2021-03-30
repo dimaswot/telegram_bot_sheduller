@@ -3,30 +3,27 @@ import requests
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, CallbackContext, Filters, CallbackQueryHandler
 import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
-from apscheduler.schedulers.blocking import BlockingScheduler
+
 from datetime import timedelta
 
-#https://api.telegram.org/bot1693338559:AAFniq64i8lKTKVWjGdq9_9lDki1W4SK3X8/setWebhook?url=https://62ec6641b1df.ngrok.io
+#https://api.telegram.org/bot1541592659:AAHAdbQr6NyQW0eXmhOFXR8A8CVP-2zEB0k/setWebhook?url=https://a50898718247.ngrok.io/
 
 app = Flask(__name__)
-sched = BlockingScheduler()
+
 CHAT_ID = 742632933
 
-token = "1693338559:AAFniq64i8lKTKVWjGdq9_9lDki1W4SK3X8"
-url = "https://telegram1bot1ksrpo.herokuapp.com"
+token = "1541592659:AAHAdbQr6NyQW0eXmhOFXR8A8CVP-2zEB0k"
+url = "https://telegram1bot1ksrpo.herokuapp.com/"
 updater = Updater(token, use_context=True)
 
 
-@app.route(f"/{token}", methods=["GET", "POST"])
+@app.route(f"/", methods=["GET", "POST"])
 def receive_update():
-    
     update: Update = telegram.Update.de_json(request.json, updater.bot)
     updater.dispatcher.process_update(update)
     print(update.message.text)
-    sched.start();
     print(update.message.chat_id)
-    
-    update.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
+    updater.bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
     return {"ok": True}
 
 
@@ -46,17 +43,6 @@ def don():
     updater.bot.send_message(chat_id=CHAT_ID, text="Это сообщение пришло в определнное время")
     pass
 
-
-@sched.scheduled_job('interval', seconds=10)
-def print_interval():
-    din()
-
-@sched.scheduled_job('cron', day_of_week='fri', hour='15-19/2', timezone='Europe/Moscow')
-def print_one():
-    don()
-
-
-@sched.scheduled_job('cron', day_of_week='fri', hour='12', minute='48', timezone='Europe/Moscow')
-def print_one_crone():
-    updater.bot.send_message(chat_id=CHAT_ID, text="Это сообщение пришло в определнное время 12 48")
-
+def bom():
+    updater.bot.send_message(chat_id=CHAT_ID, text="Это сообщение пришло в определнное время")
+    pass
