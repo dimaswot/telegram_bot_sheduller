@@ -14,3 +14,6 @@ def print_one():
 @sched.scheduled_job('cron', day_of_week='fri', hour='12', minute='48', timezone='Europe/Moscow')
 def print_one_crone():
     bom()
+    
+    
+sched.start()
